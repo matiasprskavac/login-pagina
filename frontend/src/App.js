@@ -6,6 +6,7 @@ import Local from './pages/3-Local';
 import Contact from './pages/4-Contacto';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Account from './pages/5-Account';
 import ProtectedRoute from './pages/ProtectedRoute';
 import { AuthProvider } from './auth/AuthProvider';
 
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/local" element={<Local />} />
                     <Route path="/contact" element={<Contact />} /> 
+                    <Route path='/account' element={<Account />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/admin' element={
                         <ProtectedRoute>

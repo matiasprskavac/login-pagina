@@ -14,6 +14,7 @@ const Header = () => {
                     <li><NavLink to="/menu">Menu</NavLink ></li>
                     <li><NavLink to="/local">Locals</NavLink ></li>
                     <li><NavLink to="/contact">Contact</NavLink ></li>
+                    <li><NavLink to='/account'>Account</NavLink></li>
                 </ul>
             </nav>
             <div className="media">

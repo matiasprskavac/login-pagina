@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { NavLink } from "react-router-dom";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -68,6 +69,7 @@ function Login() {
                         className="btn"
                     />
                 </form>
+                <NavLink to="/" className='return'>Return to Home</NavLink >
             </div>
         </main>
     );

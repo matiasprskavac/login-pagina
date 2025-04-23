@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/style.css';
 
 function Promotions() {
+    const [promociones, setPromociones] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPromos = async () => {
+            try {
+                const res = await fetch("http://localhost:3001/api/promociones");
+                const data = await res.json();
+                const activas = data.filter(promo => promo.activa);
+                setPromociones(activas);
+            } catch (error) {
+                console.error("Error cargando promociones:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchPromos();
+    }, []);
+
     return (
         <div className="card-container">
-            <div className="card-reward">
-                <img className="card-image" src="img/reward1.jpg" alt='reward1'/>
-                <div className="card-text">
-                    <h2>Wine Tasting</h2>
-                    <p>Discover select wines with a guided experience by expert sommeliers.</p>
-                    <button className='btn-l'>Add</button>
-                </div>
-            </div>
-            <div className="card-reward">
-            <img className="card-image" src="img/reward2.jpg" alt='reward2'/>
-                <div className="card-text">
-                    <h2>Italian Dinner</h2>
-                    <p>Enjoy an authentic Italian pasta dish made with fresh ingredients.</p>
-                    <button className='btn-l'>Add</button>
-                </div>
-            </div>
-            <div className="card-reward">
-                <img className="card-image" src="img/reward3.jpg" alt='reward3'/>
-                <div className="card-text">
-                    <h2>Sweet Reward</h2>
-                    <p>A delicious cheesecake with red fruits as a special treat for our customers.</p>
-                    <button className='btn-l'>Add</button>
-                </div>
-            </div>
+            {loading ? (
+                <p>Cargando promociones...</p>
+            ) : promociones.length === 0 ? (
+                <div className="card-reward">
+                        <div className="card-text">
+                            <h2>No promotions active for now, come later.</h2>
+                        </div>
+                    </div>
+            ) : (
+                promociones.map(promo => (
+                    <div key={promo.id} className="card-reward">
+                        <div className="card-text">
+                            <h2>{promo.titulo}</h2>
+                            <p className='description'>{promo.descripcion}</p>
+                            <p>Your user level should be at least <h5>{promo.nivel_usuario}</h5> to get this benefict</p>
+                            <button className="btn-l">More Info!</button>
+                        </div>
+                    </div>
+                ))
+            )}
         </div>
     );
 }
