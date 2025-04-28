@@ -17,9 +17,8 @@ app.post('/api/promociones', async (req, res) => {
       INSERT INTO promociones (titulo, descripcion, nivel_usuario, puntos_minimos, activa)
       VALUES (?, ?, ?, ?, ?)
     `;
-
+    
         await db.query(sql, [titulo, descripcion, nivel_usuario, puntos_minimos, activa]);
-
         res.json({ message: 'Promocion agregada con exito' });
     } catch (error) {
         console.error(error);
