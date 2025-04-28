@@ -3,11 +3,49 @@ const cors = require("cors");
 const app = express();
 const db = require('./db');
 const authRoutes = require("./routes/auth");
+const nodemailer = require('nodemailer');
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api", authRoutes);
+
+const PORT = process.env.PORT || 3001;
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+
+app.post('/api/contacto', async (req, res) => {
+    const { name, phone, email } = req.body;
+
+    try {
+        await transporter.sendMail({
+            from: '"Contacto Web" <matiasprskavac@gmail.com>', 
+            to: 'matiasprskavac@gmail.com',
+            subject: 'Contacto web',
+            html: `
+                <h2>Nuevo Mensaje de Contacto</h2>
+                <p>Nombre: ${name}</p>
+                <p>Teléfono: ${phone}</p>
+                <p>Email: ${email}</p>
+            `
+        });
+        res.json({ message: 'Correo enviado correctamente' });
+
+    } catch (error) {
+        console.error('Error al enviar correo:', error);
+        res.status(500).json({ message: 'Error al enviar el correo' });
+    }
+});
 
 app.post('/api/promociones', async (req, res) => {
     const { titulo, descripcion, nivel_usuario, puntos_minimos, activa } = req.body;
@@ -74,6 +112,6 @@ app.delete('/api/promociones/:id', async (req, res) => {
     }
 });
 
-app.listen(3001, () => {
-    console.log("Servidor corriendo en http://localhost:3001");
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
