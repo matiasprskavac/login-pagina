@@ -67,33 +67,3 @@ INSERT INTO `promociones` (`id`, `titulo`, `descripcion`, `nivel_usuario`, `punt
 (1, 'Sweet Reward', 'A delicious cheesecake with red fruits as a special treat for our customers.', 'Bronze', 100, 1),
 (2, 'Italian Dinner', 'Enjoy an authentic Italian pasta dish made with fresh ingredients.', 'Silver', 155, 1),
 (3, 'Wine Tasting', 'Discover select wines with a guided experience by expert sommeliers.', 'Gold', 200, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users`
---
-
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(100) NOT NULL,
-  `second_name` varchar(100) NOT NULL,
-  `email` varchar(191) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, `second_name`, `email`, `password`) VALUES
-(1, 'Matias', 'Prskavac', 'matiasplop970@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
-(2, 'Pepe', 'Hola', 'hola@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055');
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
