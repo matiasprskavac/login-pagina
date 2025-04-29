@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-04-2025 a las 19:00:32
+-- Tiempo de generación: 29-04-2025 a las 15:33:42
 -- Versión del servidor: 9.1.0
 -- Versión de PHP: 8.3.14
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `admins`
+--
+
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `admins`
+--
+
+INSERT INTO `admins` (`id_user`, `username`, `password`) VALUES
+(1, 'admin', '81dc9bdb52d04dc20036dbd8313ed055');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `promociones`
 --
 
@@ -36,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `promociones` (
   `puntos_minimos` int DEFAULT '0',
   `activa` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `promociones`
@@ -55,18 +76,22 @@ INSERT INTO `promociones` (`id`, `titulo`, `descripcion`, `nivel_usuario`, `punt
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `second_name` varchar(100) NOT NULL,
+  `email` varchar(191) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id_user`, `username`, `password`) VALUES
-(1, 'admin', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `users` (`id`, `first_name`, `second_name`, `email`, `password`) VALUES
+(1, 'Matias', 'Prskavac', 'matiasplop970@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(2, 'Pepe', 'Hola', 'hola@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
